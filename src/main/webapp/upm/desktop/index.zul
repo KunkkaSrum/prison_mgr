@@ -1,0 +1,66 @@
+<?page title="Hello ZK"?>
+<!--
+    variable-resolver指令，为zscript解释器指定一个变量分解器用以分解未知变量
+    这里分解了在Spring框架中声明的Java Beans，这样我们可以直接访问到它们。
+-->
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<!-- apply属性用el表达式赋值，而不是类的完全限定名 -->
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+	<window  id="winIndex" title="Hello ZK" border="normal" width="600px"
+		apply="${studentController}" >
+
+	<hbox>
+		<textbox id="name" width="250px" />
+		<button id="searchButton" label="Search" />
+		<button id="addButton" label="add" />
+		<button id="deleteAllButton" label="delete" />
+		<button id="updateButton" label="update" />
+	</hbox>
+		<!--<radiogroup-->
+				<!--onCheck="tree.pagingPosition = self.selectedItem.label;studentListbox.pagingPosition = self.selectedItem.label">-->
+			<!--<radio label="top" />-->
+			<!--<radio label="bottom" checked="true" />-->
+			<!--<radio label="both" />-->
+		<!--</radiogroup>-->
+		<!--<separator/>-->
+		<!--<button label="Change Paging Mold">-->
+			<!--<attribute name="onClick">-->
+				<!--studentListbox.pagingChild.mold = "os".equals(studentListbox.pagingChild.mold) ? "default" : "os";-->
+			<!--</attribute>-->
+		<!--</button>-->
+	<listbox id="studentListbox" style="margin-top:10px" multiple="true" checkmark="true" mold="paging" pageSize="10">
+		<listhead>
+			<listheader label="全选" align="center" width="10%"/>
+			<listheader label="id" />
+			<listheader label="姓名" />
+			<listheader label="密码" />
+			<listheader label="年龄" />
+			<listheader label="性别" />
+			<listheader label="操作" />
+		</listhead>
+			<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@{each.id}" style="display:none" />
+						</listcell>
+						<listcell label="${each.id}" />
+						<listcell label="${each.name}" />
+						<listcell label="${each.password}" />
+						<listcell label="${each.age}" />
+						<listcell label="${each.sexs}" />
+						<listcell>
+							<button label="Delete" onClick="studentController.delete()"/>
+						</listcell>
+					</listitem>
+			</template>
+	</listbox>
+
+	</window>
+		<!--<zscript language="JavaScript">-->
+			<!--var name = document.getElementById("name");-->
+			<!--function() {-->
+				<!--name.onMouse-->
+			<!--}-->
+		<!--</zscript>-->
+</zk>

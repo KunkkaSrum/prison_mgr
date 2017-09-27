@@ -1,0 +1,37 @@
+<?page title="Student"?>
+<!--
+    variable-resolver指令，为zscript解释器指定一个变量分解器用以分解未知变量
+    这里分解了在Spring框架中声明的Java Beans，这样我们可以直接访问到它们。
+-->
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<!-- apply属性用el表达式赋值，而不是类的完全限定名 -->
+<window title="updateStudent" border="normal" width="40%" height="40%" apply="${studentUpdateController}" >
+    <button id="updateSaveButton" label="updateSave" />
+    <grid width="100%">
+        <columns sizable="true">
+            <column label="字段" width="25%"/>
+            <column label="值" width="25%"/>
+            <column label="字段" width="25%"/>
+            <column label="值" width="25%"/>
+        </columns>
+        <rows>
+            <row>
+
+                <label value="姓名"/>
+                <textbox id="name" constraint="no empty"/>
+                <label value="密码"/>
+                <textbox id="password" constraint="no empty"/>
+            </row>
+            <row>
+                <label value="年龄"/>
+                <intbox id="age" constraint="no empty"/>
+                <label value="性别"/>
+                <combobox id="sex" constraint="no empty">
+                    <comboitem label="男" value="0"/>
+                    <comboitem label="女" value="1"/>
+                </combobox>
+            </row>
+
+        </rows>
+    </grid>
+</window>

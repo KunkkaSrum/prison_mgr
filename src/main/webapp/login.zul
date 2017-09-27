@@ -1,0 +1,28 @@
+<?page title="Hello ZK"?>
+<!--
+    variable-resolver指令，为zscript解释器指定一个变量分解器用以分解未知变量
+    这里分解了在Spring框架中声明的Java Beans，这样我们可以直接访问到它们。
+-->
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<!-- apply属性用el表达式赋值，而不是类的完全限定名 -->
+<window title="upm用户订购管理系统" style="left:center" border="normal" width="350px"
+        apply="${loginController}" >
+        <div>
+            <grid id="userLoginBody" width="350px">
+                <rows>
+                    <row>
+                        <label value="账号*："/>
+                        <textbox id="account" name="account" width="145px" constraint="no empty" />
+                    </row>
+                    <row>
+                        <label value="密码*："/>
+                        <textbox type="password" id="password" name="password" width="145px" constraint="no empty" />
+                    </row>
+                    <row>
+                        <button id="loginButton" label="登录"/>
+                        <button id="helpButton" label="注册" />
+                    </row>
+                </rows>
+            </grid>
+        </div>
+</window>

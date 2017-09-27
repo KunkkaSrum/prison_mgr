@@ -1,0 +1,37 @@
+<?page title="Hello ZK"?>
+<!--
+    variable-resolver指令，为zscript解释器指定一个变量分解器用以分解未知变量
+    这里分解了在Spring框架中声明的Java Beans，这样我们可以直接访问到它们。
+-->
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<!-- apply属性用el表达式赋值，而不是类的完全限定名 -->
+<window title="Hello ZK" border="normal" width="600px"
+		apply="${studentController}" >
+
+	<hbox>
+		<textbox id="name" width="250px" />
+		<button id="searchButton" label="Search" />
+	</hbox>
+	<listbox id="studentListbox" style="margin-top:10px">
+
+		<listhead>
+			<listheader label="id" />
+			<listheader label="姓名" />
+			<listheader label="密码" />
+			<listheader label="年龄" />
+			<listheader label="性别" />
+		</listhead>
+
+		<template name="model">
+			<listitem>
+				<listcell label="${each.id}" />
+				<listcell label="${each.name}" />
+				<listcell label="${each.password}" />
+				<listcell label="${each.age}" />
+				<listcell label="${each.sex}" />
+			</listitem>
+		</template>
+
+	</listbox>
+
+</window>

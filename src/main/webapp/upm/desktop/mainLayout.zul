@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="mainLayout" title="华数传媒网络有限公司"?>
+<?link rel="icon" href="/image/favicon.ico" type="image/x-icon"?> 
+<?link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon"?> 
+<?meta name="keywords" content="华数传媒网络有限公司, 2010.10.10" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+<style>
+body {
+	padding: 0 !important;
+}
+
+tr.myodd td.z-row-inner, tr.myodd {
+	background-color: #E4EBF8;
+}
+.myimg {
+	margin: 5px; border: 1px solid #B0C75E;
+}
+div.z-column-cnt {
+	text-align: center; /*font-weight: bold;*/
+}
+
+div.z-row-cnt span {
+	font-family: Tahoma,Arial,serif;
+	/*color: #0E3A99;*/
+}
+</style>
+
+<borderlayout id="main" height="100%" width="100%" apply="com.wasu.core.desktop.zk.MainLayoutComposer">
+	<north border="none" sclass="demo-header" collapsible="true" height="78px">
+	<div>
+		<toolbar width="100%">
+			<div style="float:right">
+				<html><![CDATA[&nbsp;&nbsp;]]></html><image src="/image/logo.png"/><image src="/image/l3.png"/>   
+				<html><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></html>
+				<html><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]></html>
+				<html><![CDATA[当前用户：]]></html>
+				<dynalabel trigger="1" entity="SysOrg" field="orgName" key1="orgId" key1Val="${SessionObj.orgId}" style="font-size:10pt; font-weight:bold;"/>
+				<label value="${SessionObj.userName}" style="font-size:10pt; font-weight:bold;"/>
+				<dynalabel trigger="1" entity="SysRole" field="roleName" key1="roleId" key1Val="${SessionObj.roleId}" style="font-size:10pt; font-weight:bold;"/>	
+				<html><![CDATA[]]></html>
+				<button label="修改密码"  id="edit" /> 
+			</div>
+		</toolbar>
+		<div>
+			<menubar id="menubar" width="100%">
+				<privmenuitem forEach="${resources}" userId="${SessionObj.userId}" orgId="${SessionObj.orgId}" roleId="${SessionObj.roleId}" rescId="${each.rescId}" id="menu_${each.rescId}" label="${each.rescName}" src="${each.menuPic}" value="${each.rescId}"  forward="main.onMenuitemSelect"/>
+			</menubar>
+		</div>
+	</div>
+	</north>
+	<west id="mainWest" title="${SystemName}" size="180px" flex="true" splittable="true" collapsible="true" autoscroll="true">
+		<tree id="xtree" fixedLayout="true" style="border: 0px none;"/>
+	</west>   
+   	<center border="normal" autoscroll="true" flex="true">
+   		<include style="padding:3px;" id="xcontents" />
+   	</center>
+   	<!-- east size="20%" splittable="true" collapsible="true">右边信息</east -->
+   	<south size="20px" border="none">
+   		<toolbar>
+			<label value="Copyright 2014,华数传媒网络有限公司"/>						
+		</toolbar>
+	</south>
+</borderlayout>
+</zk>

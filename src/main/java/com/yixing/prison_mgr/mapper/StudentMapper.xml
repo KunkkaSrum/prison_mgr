@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--注意：此处的命名空间是StudentMapper的全限定类名-->
+<mapper namespace="com.yixing.prison_mgr.mapper.StudentMapper">
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="studentEntity">
+        select id,name,password,age,sex from student where 1=1
+        and name like '%' #{name} '%'
+    </select>
+
+    <select id="queryByNameAndPassword" parameterType="java.util.HashMap" resultType="studentEntity">
+        SELECT * FROM student
+        WHERE name = #{name}
+        AND password = #{password}
+        LIMIT 1
+    </select>
+
+    <insert id="studentAddSave" parameterType="java.util.HashMap" >
+        INSERT INTO student (name,password,age,sex) VALUES (#{name},#{password},#{age},#{sex})
+    </insert>
+
+    <delete id="studentDeleteSave" parameterType="int">
+        DELETE FROM student WHERE id=#{_paramter}
+    </delete>
+
+    <delete id="studentAllDeleteSave" parameterType="java.util.List">
+        DELETE FROM student WHERE id IN (
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+    <update id="studentUpdateSave" parameterType="java.util.HashMap">
+        UPDATE student SET name=#{name},password=#{password},age=#{age},sex=#{sex}
+        WHERE id=#{id}
+    </update>
+</mapper>
